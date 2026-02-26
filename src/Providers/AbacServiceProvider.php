@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace ThuyDX\ABAC\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use ThuyDX\ABAC\Console\ClearAbacCacheCommand;
+use ThuyDX\ABAC\Console\WarmAbacCacheCommand;
 use ThuyDX\ABAC\Contracts\AbacEngineInterface;
 use ThuyDX\ABAC\Contracts\ConstraintRepositoryInterface;
 use ThuyDX\ABAC\DSL\Evaluator;
@@ -50,6 +52,8 @@ final class AbacServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        $this->registerAbacLoggingChannel();
+
         $this->publishes([
             __DIR__.'/../../config/config.php' => config_path('abac.php'),
         ], 'abac-config');
@@ -57,5 +61,35 @@ final class AbacServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(
             __DIR__.'/../../database/migrations'
         );
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                ClearAbacCacheCommand::class,
+                WarmAbacCacheCommand::class,
+            ]);
+        }
+    }
+
+    /*
+   |--------------------------------------------------------------------------
+   | Register ABAC Logging Channel (Runtime Safe)
+   |--------------------------------------------------------------------------
+   */
+    private function registerAbacLoggingChannel(): void
+    {
+        $channels = config('logging.channels', []);
+
+        if (isset($channels['abac'])) {
+            return;
+        }
+
+        $channels['abac'] = [
+            'driver' => 'daily',
+            'path'   => storage_path('logs/abac.log'),
+            'level'  => config('abac.trace.log_level', 'info'),
+            'days'   => 14,
+        ];
+
+        config(['logging.channels' => $channels]);
     }
 }

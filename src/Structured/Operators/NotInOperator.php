@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ThuyDX\ABAC\Structured\Operators;
 
-use ThuyDX\ABAC\Structured\Constracts\Operators\OperatorInterface;
+use ThuyDX\ABAC\Structured\Contracts\OperatorInterface;
 
 final class NotInOperator implements OperatorInterface
 {

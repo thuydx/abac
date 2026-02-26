@@ -17,8 +17,8 @@ final class EvaluationContext
     public function variables(): array
     {
         return [
-            'user_uuid' => $this->userUuid,
             ...$this->attributes,
+            'user_uuid' => $this->userUuid,
         ];
     }
 }

@@ -19,7 +19,13 @@ final class ExpressionParser
 
     public function parse(): mixed
     {
-        return $this->parseOr();
+        $result = $this->parseOr();
+
+        if ($this->position < count($this->tokens)) {
+            throw new RuntimeException('Unexpected token');
+        }
+
+        return $result;
     }
 
     private function parseOr(): mixed
@@ -108,7 +114,7 @@ final class ExpressionParser
         $args = [];
 
         while (! $this->check(')')) {
-            $args[] = $this->parse();
+            $args[] = $this->parseOr();
             if ($this->check(',')) {
                 $this->advance();
             }
@@ -145,7 +151,8 @@ final class ExpressionParser
 
     private function check(string $type): bool
     {
-        return $this->tokens[$this->position] ?? $type === null;
+        return isset($this->tokens[$this->position])
+            && $this->tokens[$this->position] === $type;
     }
 
     private function advance(): mixed

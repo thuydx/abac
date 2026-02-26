@@ -235,3 +235,66 @@ $security->check(
   }
 }
 ```
+## Cache Architecture
+### Constraint Cache
+#### Constraint Cache
+``` 
+abac:constraints:{user}:{permission}:{scope}:{module}
+```
+#### Redis tags
+```
+abac
+user:{uuid}
+permission:{slug}
+```
+#### Flow
+```
+Request
+   ↓
+Repository
+   ↓
+Cache::tags(...)->remember()
+   ↓
+Redis
+```
+### Decision Cache (Short TTL)
+```
+Cache::tags(['user:{uuid}'])->flush();
+```
+
+## How to use
+in config/abac.php:
+``` config('abac.cache.enabled') === true ```
+
+### Khi user role thay đổi
+
+BẮT BUỘC gọi:
+```
+app(AbacCacheManager::class)
+->clearUser($userUuid);
+```
+### Khi permission thay đổi
+```
+app(AbacCacheManager::class)
+->clearPermission($permissionSlug);
+```
+### Khi sync RBAC module
+
+Khuyến nghị:
+```
+app(AbacCacheManager::class)
+->clearAll();
+```
+
+## CLI Commands
+### Clear cache
+```
+php artisan abac:cache-clear --user=UUID
+php artisan abac:cache-clear --permission=post.view
+php artisan abac:cache-clear --all
+```
+### Warm cache
+```
+php artisan abac:cache-warm
+php artisan abac:cache-warm --user=UUID
+```

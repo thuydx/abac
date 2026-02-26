@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ThuyDX\ABAC\Structured\Constracts\Operators;
+namespace ThuyDX\ABAC\Structured\Contracts;
 
 interface OperatorInterface
 {
