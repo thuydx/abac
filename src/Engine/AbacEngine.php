@@ -7,6 +7,7 @@ namespace ThuyDX\ABAC\Engine;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use ThuyDX\ABAC\Contracts\AbacEngineInterface;
 use ThuyDX\ABAC\Contracts\ConstraintRepositoryInterface;
 use ThuyDX\ABAC\Contracts\PolicyInterface;
@@ -150,6 +151,25 @@ final class AbacEngine implements AbacEngineInterface
                 $key,
                 config('abac.trace.redis_ttl', 3600),
                 json_encode($payload, JSON_THROW_ON_ERROR)
+            );
+        }
+    }
+
+    public function authorize(
+        EvaluationContext $context,
+        ?DecisionTrace $trace = null
+    ): void {
+
+        $decision = $this->decide($context, $trace);
+
+        if ($decision !== Decision::ALLOW) {
+            throw new HttpException(
+                403,
+                sprintf(
+                    'ABAC denied: user [%s] permission [%s]',
+                    $context->userUuid,
+                    $context->permission
+                )
             );
         }
     }
