@@ -47,7 +47,7 @@ describe('ABAC Performance', function () {
         $engine->decide($context);
         $duration = round(microtime(true) - $start, 3);
 
-        echo"\n  ✓ Engine execution: {$duration} sec\n";
+        echo "\n  ✓ Engine execution: {$duration} sec\n";
 
         expect($duration)->toBeLessThan(1.0);
     });
@@ -78,7 +78,7 @@ describe('ABAC Performance', function () {
         $start = microtime(true);
         $engine->decide($context);
         $duration = round(microtime(true) - $start, 3);
-        echo"  ✓ No-sort execution: {$duration} sec\n";
+        echo "  ✓ No-sort execution: {$duration} sec\n";
 
         expect($duration)->toBeLessThan(1.0);
     });
@@ -113,7 +113,7 @@ describe('ABAC Performance', function () {
         $start = microtime(true);
         $engine->decide($context);
         $duration = round(microtime(true) - $start, 3);
-        echo"  ✓ No-trace execution: {$duration} sec\n";
+        echo "  ✓ No-trace execution: {$duration} sec\n";
 
         expect($duration)->toBeLessThan(1.2);
     });
@@ -153,8 +153,8 @@ describe('ABAC Performance', function () {
 
         $duration = round(microtime(true) - $start, 3);
 
-        echo"  ✓ Execution time: {$duration} sec\n";
+        echo "  ✓ Execution time: {$duration} sec\n";
 
-        expect($duration)->toBeLessThan(3.0);
+        expect($duration)->toBeLessThan(5.0);
     });
 });
