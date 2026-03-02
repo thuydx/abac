@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace ThuyDX\ABAC\Engine;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use ThuyDX\ABAC\Contracts\AbacEngineInterface;
 use ThuyDX\ABAC\Contracts\ConstraintRepositoryInterface;
-use ThuyDX\ABAC\Contracts\PolicyInterface;
 use ThuyDX\ABAC\ValueObjects\Decision;
 use ThuyDX\ABAC\ValueObjects\DecisionTrace;
 use ThuyDX\ABAC\ValueObjects\TraceLevel;
@@ -59,10 +57,10 @@ final class AbacEngine implements AbacEngineInterface
     ): Decision {
 
         $constraints = $this->repository->forUserAndPermission(
-            userUuid: $context->userUuid,
+            userUuid      : $context->userUuid,
             permissionSlug: $context->permission,
-            scope: $context->scope,
-            module: $context->module,
+            scope         : $context->scope,
+            module        : $context->module,
         );
 
         if (empty($constraints)) {
@@ -82,12 +80,12 @@ final class AbacEngine implements AbacEngineInterface
                 $start    = microtime(true);
                 $decision = $policy->evaluate($expression, $context);
 
-                $decisionTrace = $decisionTrace->add(
-                    expression: $expression,
+                $decisionTrace->add(
+                    expression : $expression,
                     policyClass: get_class($policy),
-                    decision: $decision,
-                    priority: $priority,
-                    startTime: $start
+                    decision   : $decision,
+                    priority   : $priority,
+                    startTime  : $start
                 );
 
                 if ($decision === Decision::DENY) {
