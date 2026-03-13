@@ -74,6 +74,7 @@ final class UserPermissionConstraintRepository implements ConstraintRepositoryIn
             $module ?? 'null'
         );
     }
+
     private function queryConstraints(
         string $userUuid,
         string $permissionSlug,

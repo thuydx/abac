@@ -9,7 +9,7 @@ use RuntimeException;
 final class Evaluator
 {
     private array $astCache = [];
-    
+
     public function evaluate(
         string $expression,
         array $variables

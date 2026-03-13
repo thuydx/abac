@@ -28,12 +28,14 @@ final class ClearAbacCacheCommand extends Command
 
             if (! $this->confirm('Are you sure you want to clear ALL ABAC cache?')) {
                 $this->info('Operation cancelled.');
+
                 return self::SUCCESS;
             }
 
             $cacheManager->clearAll();
 
             $this->info('All ABAC cache cleared successfully.');
+
             return self::SUCCESS;
         }
 

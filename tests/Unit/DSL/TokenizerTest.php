@@ -7,15 +7,15 @@ use ThuyDX\ABAC\DSL\Tokenizer;
 describe('Tokenizer (ABAC 1.0)', function () {
 
     it('tokenizes comparison expression', function () {
-        $tokens = (new Tokenizer("age >= 18"))->tokenize();
+        $tokens = (new Tokenizer('age >= 18'))->tokenize();
 
         expect($tokens)->toBe([
-            'age', '>=', '18'
+            'age', '>=', '18',
         ]);
     });
 
     it('tokenizes logical expression', function () {
-        $tokens = (new Tokenizer("age >= 18 && active == true"))->tokenize();
+        $tokens = (new Tokenizer('age >= 18 && active == true'))->tokenize();
 
         expect($tokens)->toContain('&&')
             ->and($tokens)->toContain('==');
@@ -25,7 +25,7 @@ describe('Tokenizer (ABAC 1.0)', function () {
         $tokens = (new Tokenizer("name == 'Thuy'"))->tokenize();
 
         expect($tokens)->toBe([
-            'name', '==', 'Thuy'
+            'name', '==', 'Thuy',
         ]);
     });
 
@@ -38,7 +38,7 @@ describe('Tokenizer (ABAC 1.0)', function () {
     });
 
     it('throws exception for invalid operator', function () {
-        (new Tokenizer("age @@ 18"))->tokenize();
+        (new Tokenizer('age @@ 18'))->tokenize();
     })->throws(RuntimeException::class);
 
 });

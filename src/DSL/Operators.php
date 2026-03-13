@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace ThuyDX\ABAC\DSL;
 
 use DateTimeImmutable;
+use Exception;
+use RuntimeException;
 
 final class Operators
 {
@@ -19,14 +21,14 @@ final class Operators
         $right = self::normalizeDate($right);
 
         return match ($operator) {
-            '==' => $left == $right,
-            '!=' => $left != $right,
+            '==' => $left === $right,
+            '!=' => $left !== $right,
             '>'  => $left > $right,
             '<'  => $left < $right,
             '>=' => $left >= $right,
             '<=' => $left <= $right,
             'in' => in_array($left, (array) $right, true),
-            default => throw new \RuntimeException("Unsupported operator")
+            default => throw new RuntimeException('Unsupported operator')
         };
     }
 
@@ -54,7 +56,7 @@ final class Operators
 
             'now' => new DateTimeImmutable(),
 
-            default => throw new \RuntimeException("Unknown function {$name}")
+            default => throw new RuntimeException("Unknown function {$name}")
         };
     }
 
@@ -67,7 +69,7 @@ final class Operators
         if (is_string($value)) {
             try {
                 return new DateTimeImmutable($value);
-            } catch (\Exception) {
+            } catch (Exception) {
                 return $value;
             }
         }

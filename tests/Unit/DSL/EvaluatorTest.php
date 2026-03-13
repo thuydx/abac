@@ -8,7 +8,7 @@ describe('Evaluator (ABAC 1.0)', function () {
 
     it('evaluates simple comparison', function () {
         $result = (new Evaluator())->evaluate(
-            "age >= 18",
+            'age >= 18',
             ['age' => 20]
         );
 
@@ -17,7 +17,7 @@ describe('Evaluator (ABAC 1.0)', function () {
 
     it('evaluates logical and', function () {
         $result = (new Evaluator())->evaluate(
-            "age >= 18 && active == true",
+            'age >= 18 && active == true',
             ['age' => 20, 'active' => true]
         );
 
@@ -26,7 +26,7 @@ describe('Evaluator (ABAC 1.0)', function () {
 
     it('evaluates logical or', function () {
         $result = (new Evaluator())->evaluate(
-            "age >= 18 || active == true",
+            'age >= 18 || active == true',
             ['age' => 15, 'active' => true]
         );
 
@@ -35,7 +35,7 @@ describe('Evaluator (ABAC 1.0)', function () {
 
     it('evaluates not operator', function () {
         $result = (new Evaluator())->evaluate(
-            "! active",
+            '! active',
             ['active' => false]
         );
 

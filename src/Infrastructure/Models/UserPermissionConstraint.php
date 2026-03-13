@@ -39,8 +39,8 @@ final class UserPermissionConstraint extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn ($model) => $model->clearAbacCache());
-        static::deleted(fn ($model) => $model->clearAbacCache());
+        self::saved(fn ($model) => $model->clearAbacCache());
+        self::deleted(fn ($model) => $model->clearAbacCache());
     }
 
     public function clearAbacCache(): void

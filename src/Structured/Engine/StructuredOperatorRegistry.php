@@ -43,6 +43,6 @@ final class StructuredOperatorRegistry
     public function get(string $operator)
     {
         return $this->operators[$operator]
-            ?? throw new InvalidArgumentException("Operator [$operator] not supported.");
+            ?? throw new InvalidArgumentException("Operator [{$operator}] not supported.");
     }
 }

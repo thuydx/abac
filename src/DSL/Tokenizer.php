@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace ThuyDX\ABAC\DSL;
 
+use RuntimeException;
+
 final class Tokenizer
 {
     private string $input;
+
     private int $position = 0;
+
     private int $length;
 
     public function __construct(string $input)
@@ -26,27 +30,32 @@ final class Tokenizer
 
             if (ctype_space($char)) {
                 $this->position++;
+
                 continue;
             }
 
-            if (in_array($char, ['(', ')', '[', ']', ',', '!'])) {
+            if (in_array($char, ['(', ')', '[', ']', ',', '!'], true)) {
                 $tokens[] = $char;
                 $this->position++;
+
                 continue;
             }
 
             if ($char === '\'' || $char === '"') {
                 $tokens[] = $this->readString($char);
+
                 continue;
             }
 
             if (preg_match('/[a-zA-Z_]/', $char)) {
                 $tokens[] = $this->readIdentifier();
+
                 continue;
             }
 
             if (preg_match('/[0-9]/', $char)) {
                 $tokens[] = $this->readNumber();
+
                 continue;
             }
 
@@ -103,15 +112,17 @@ final class Tokenizer
         foreach ($operators as $op) {
             if (str_starts_with(substr($this->input, $this->position), $op)) {
                 $this->position += strlen($op);
+
                 return $op;
             }
         }
 
         if (str_starts_with(substr($this->input, $this->position), 'in')) {
             $this->position += 2;
+
             return 'in';
         }
 
-        throw new \RuntimeException('Invalid operator');
+        throw new RuntimeException('Invalid operator');
     }
 }
