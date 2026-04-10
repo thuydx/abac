@@ -35,7 +35,7 @@ describe('AbacServiceProvider', function () {
 
         it('registers Evaluator as singleton', function () {
 
-            $first  = $this->app->make(Evaluator::class);
+            $first = $this->app->make(Evaluator::class);
             $second = $this->app->make(Evaluator::class);
 
             expect($first)
@@ -53,7 +53,7 @@ describe('AbacServiceProvider', function () {
                 StructuredPolicy::class,
             ]);
 
-            $first  = $this->app->make(AbacEngineInterface::class);
+            $first = $this->app->make(AbacEngineInterface::class);
             $second = $this->app->make(AbacEngineInterface::class);
 
             expect($first)
@@ -71,7 +71,7 @@ describe('AbacServiceProvider', function () {
             $engine = $this->app->make(AbacEngineInterface::class);
 
             $reflection = new ReflectionClass($engine);
-            $property   = $reflection->getProperty('policies');
+            $property = $reflection->getProperty('policies');
             $property->setAccessible(true);
 
             $policies = $property->getValue($engine);

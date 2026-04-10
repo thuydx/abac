@@ -16,19 +16,19 @@ beforeEach(function () {
 describe('Repository: UserPermissionConstraintRepository (ABAC 1.0)', function () {
     it('returns expressions for specific user and permission', function () {
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.view',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['department' => 'IT'],
-            'scope'      => 'admin',
+            'scope' => 'admin',
         ]);
 
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.view',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['department' => 'HR'],
-            'scope'      => 'admin',
+            'scope' => 'admin',
         ]);
 
         $repo = new UserPermissionConstraintRepository();
@@ -47,19 +47,19 @@ describe('Repository: UserPermissionConstraintRepository (ABAC 1.0)', function (
 
     it('filters by scope when provided', function () {
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.edit',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['level' => 1],
-            'scope'      => 'admin',
+            'scope' => 'admin',
         ]);
 
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.edit',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['level' => 2],
-            'scope'      => 'user',
+            'scope' => 'user',
         ]);
 
         $repo = new UserPermissionConstraintRepository();
@@ -78,19 +78,19 @@ describe('Repository: UserPermissionConstraintRepository (ABAC 1.0)', function (
 
     it('filters by module when provided', function () {
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.delete',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['allowed' => true],
-            'scope'      => 'system', // ✅ không còn null
+            'scope' => 'system', // ✅ không còn null
         ]);
 
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.delete',
-            'module'     => 'cms',
+            'module' => 'cms',
             'expression' => ['allowed' => false],
-            'scope'      => 'system',
+            'scope' => 'system',
         ]);
 
         $repo = new UserPermissionConstraintRepository();
@@ -109,19 +109,19 @@ describe('Repository: UserPermissionConstraintRepository (ABAC 1.0)', function (
 
     it('returns all expressions for user', function () {
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-2',
+            'user_uuid' => 'user-2',
             'permission' => 'post.view',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['a' => 1],
-            'scope'      => 'system',
+            'scope' => 'system',
         ]);
 
         UserPermissionConstraint::create([
-            'user_uuid'  => 'user-2',
+            'user_uuid' => 'user-2',
             'permission' => 'post.edit',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['b' => 2],
-            'scope'      => 'system',
+            'scope' => 'system',
         ]);
 
         $repo = new UserPermissionConstraintRepository();

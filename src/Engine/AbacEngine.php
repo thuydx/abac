@@ -31,7 +31,7 @@ final class AbacEngine implements AbacEngineInterface
     ): Decision {
 
         $traceEnabled = config('abac.trace.enabled', false);
-        $traceLevel   = TraceLevel::from(
+        $traceLevel = TraceLevel::from(
             config('abac.trace.level', 'info')
         );
 
@@ -77,7 +77,7 @@ final class AbacEngine implements AbacEngineInterface
                     continue;
                 }
 
-                $start    = microtime(true);
+                $start = microtime(true);
                 $decision = $policy->evaluate($expression, $context);
 
                 $decisionTrace->add(
@@ -115,13 +115,13 @@ final class AbacEngine implements AbacEngineInterface
 
         $payload = [
             'correlation_id' => $trace->correlationId(),
-            'user_uuid'      => $context->userUuid,
-            'permission'     => $context->permission,
-            'scope'          => $context->scope,
-            'module'         => $context->module,
-            'decision'       => $decision->value,
-            'steps'          => $trace->all(),
-            'timestamp'      => now()->toDateTimeString(),
+            'user_uuid' => $context->userUuid,
+            'permission' => $context->permission,
+            'scope' => $context->scope,
+            'module' => $context->module,
+            'decision' => $decision->value,
+            'steps' => $trace->all(),
+            'timestamp' => now()->toDateTimeString(),
         ];
 
         /*

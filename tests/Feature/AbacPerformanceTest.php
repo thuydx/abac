@@ -21,13 +21,13 @@ describe('ABAC Performance', function () {
     it('evaluates 10k constraints fast (no DB)', function () {
 
         $repository = Mockery::mock(ConstraintRepositoryInterface::class);
-        $policy     = Mockery::mock(PolicyInterface::class);
+        $policy = Mockery::mock(PolicyInterface::class);
 
         $constraints = [];
 
         for ($i = 0; $i < 10000; $i++) {
             $constraints[] = [
-                'type'     => 'dsl',
+                'type' => 'dsl',
                 'priority' => $i,
             ];
         }
@@ -56,11 +56,11 @@ describe('ABAC Performance', function () {
         Config::set('abac.trace.enabled', false);
 
         $repository = Mockery::mock(ConstraintRepositoryInterface::class);
-        $policy     = Mockery::mock(PolicyInterface::class);
+        $policy = Mockery::mock(PolicyInterface::class);
 
         // All constraints have same priority → minimal sorting work
         $constraints = array_fill(0, 10000, [
-            'type'     => 'dsl',
+            'type' => 'dsl',
             'priority' => 1,
         ]);
 
@@ -88,13 +88,13 @@ describe('ABAC Performance', function () {
         Config::set('abac.trace.enabled', false);
 
         $repository = Mockery::mock(ConstraintRepositoryInterface::class);
-        $policy     = Mockery::mock(PolicyInterface::class);
+        $policy = Mockery::mock(PolicyInterface::class);
 
         $constraints = [];
 
         for ($i = 0; $i < 10000; $i++) {
             $constraints[] = [
-                'type'     => 'dsl',
+                'type' => 'dsl',
                 'priority' => $i,
             ];
         }
@@ -129,15 +129,15 @@ describe('ABAC Performance', function () {
 
         for ($i = 0; $i < 1000; $i++) {
             UserPermissionConstraint::create([
-                'user_uuid'  => 'u1',
+                'user_uuid' => 'u1',
                 'permission' => 'post.view',
                 'expression' => [
-                    'type'       => 'dsl',
+                    'type' => 'dsl',
                     'expression' => 'age >= 18',
-                    'priority'   => rand(1, 100),
+                    'priority' => rand(1, 100),
                 ],
-                'scope'      => null,
-                'module'     => null,
+                'scope' => null,
+                'module' => null,
             ]);
         }
 

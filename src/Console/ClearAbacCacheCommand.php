@@ -19,10 +19,10 @@ final class ClearAbacCacheCommand extends Command
 
     public function handle(AbacCacheManager $cacheManager): int
     {
-        $user       = $this->option('user');
+        $user = $this->option('user');
         $permission = $this->option('permission');
-        $all        = $this->option('all');
-        $rebuild    = $this->option('rebuild');
+        $all = $this->option('all');
+        $rebuild = $this->option('rebuild');
 
         if ($all) {
 

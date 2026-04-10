@@ -53,12 +53,12 @@ final class DecisionTrace
         $newSteps = $this->steps;
 
         $newSteps[] = [
-            'timestamp'   => microtime(true),
-            'priority'    => $priority,
-            'policy'      => $policyClass,
-            'decision'    => $decision->value,
+            'timestamp' => microtime(true),
+            'priority' => $priority,
+            'policy' => $policyClass,
+            'decision' => $decision->value,
             'duration_ms' => round($duration, 3),
-            'expression'  => $this->level === TraceLevel::DEBUG
+            'expression' => $this->level === TraceLevel::DEBUG
                 ? $expression
                 : [],
         ];

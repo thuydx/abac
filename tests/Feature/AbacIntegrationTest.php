@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
+use ThuyDX\ABAC\DSL\Evaluator;
 use ThuyDX\ABAC\Engine\AbacEngine;
 use ThuyDX\ABAC\Engine\EvaluationContext;
 use ThuyDX\ABAC\Infrastructure\Models\UserPermissionConstraint;
 use ThuyDX\ABAC\Policies\ExpressionPolicy;
 use ThuyDX\ABAC\Policies\StructuredPolicy;
-use ThuyDX\ABAC\DSL\Evaluator;
 use ThuyDX\ABAC\Structured\Engine\StructuredEvaluator;
 use ThuyDX\ABAC\Structured\Engine\StructuredOperatorRegistry;
 

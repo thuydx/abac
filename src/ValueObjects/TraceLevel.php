@@ -6,7 +6,7 @@ namespace ThuyDX\ABAC\ValueObjects;
 
 enum TraceLevel: string
 {
-    case NONE  = 'none';
-    case INFO  = 'info';
+    case NONE = 'none';
+    case INFO = 'info';
     case DEBUG = 'debug';
 }

@@ -8,7 +8,7 @@ describe('AttributeBag (ABAC 1.0)', function () {
     it('returns value by key', function () {
         $bag = new AttributeBag([
             'department' => 'IT',
-            'level'      => 5,
+            'level' => 5,
         ]);
 
         expect($bag->get('department'))->toBe('IT')

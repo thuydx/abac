@@ -24,11 +24,11 @@ describe('Model: UserPermissionConstraint (ABAC 1.0)', function () {
 
     it('casts expression to array', function () {
         $constraint = UserPermissionConstraint::create([
-            'user_uuid'  => 'user-1',
+            'user_uuid' => 'user-1',
             'permission' => 'post.view',
-            'module'     => 'blog',
+            'module' => 'blog',
             'expression' => ['department' => 'IT'],
-            'scope'      => 'admin',
+            'scope' => 'admin',
         ]);
 
         expect($constraint->expression)

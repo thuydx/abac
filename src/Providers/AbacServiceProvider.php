@@ -85,9 +85,9 @@ final class AbacServiceProvider extends ServiceProvider
 
         $channels['abac'] = [
             'driver' => 'daily',
-            'path'   => storage_path('logs/abac.log'),
-            'level'  => config('abac.trace.log_level', 'info'),
-            'days'   => 14,
+            'path' => storage_path('logs/abac.log'),
+            'level' => config('abac.trace.log_level', 'info'),
+            'days' => 14,
         ];
 
         config(['logging.channels' => $channels]);

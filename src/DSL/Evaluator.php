@@ -17,7 +17,7 @@ final class Evaluator
 
         if (! isset($this->astCache[$expression])) {
             $tokens = (new Tokenizer($expression))->tokenize();
-            $ast    = (new ExpressionParser($tokens))->parse();
+            $ast = (new ExpressionParser($tokens))->parse();
             $this->astCache[$expression] = $ast;
         }
 
@@ -37,21 +37,21 @@ final class Evaluator
         }
 
         return match ($node[0]) {
-            'literal'  => $variables[$node[1]] ?? $node[1],
-            'array'    => array_map(
+            'literal' => $variables[$node[1]] ?? $node[1],
+            'array' => array_map(
                 fn ($v) => $variables[$v] ?? $v,
                 $node[1]
             ),
-            'compare'  => Operators::compare(
+            'compare' => Operators::compare(
                 $this->evaluateNode($node[2], $variables),
                 $node[1],
                 $this->evaluateNode($node[3], $variables)
             ),
-            'and'      => $this->evaluateNode($node[1], $variables)
+            'and' => $this->evaluateNode($node[1], $variables)
                 && $this->evaluateNode($node[2], $variables),
-            'or'       => $this->evaluateNode($node[1], $variables)
+            'or' => $this->evaluateNode($node[1], $variables)
                 || $this->evaluateNode($node[2], $variables),
-            'not'      => ! $this->evaluateNode($node[1], $variables),
+            'not' => ! $this->evaluateNode($node[1], $variables),
             'function' => Operators::callFunction(
                 $node[1],
                 array_map(
@@ -59,7 +59,7 @@ final class Evaluator
                     $node[2]
                 )
             ),
-            default    => throw new RuntimeException('Invalid AST node')
+            default => throw new RuntimeException('Invalid AST node')
         };
     }
 }

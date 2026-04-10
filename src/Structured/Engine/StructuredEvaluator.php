@@ -29,7 +29,7 @@ final class StructuredEvaluator
             return $this->evaluateCondition($node, $context);
         }
 
-        $operator   = strtolower($node['operator'] ?? 'and');
+        $operator = strtolower($node['operator'] ?? 'and');
         $conditions = $node['conditions'] ?? [];
 
         $results = array_map(
@@ -38,8 +38,8 @@ final class StructuredEvaluator
         );
 
         return match ($operator) {
-            'and'   => ! in_array(false, $results, true),
-            'or'    => in_array(true, $results, true),
+            'and' => ! in_array(false, $results, true),
+            'or' => in_array(true, $results, true),
             default => false,
         };
     }
@@ -49,7 +49,7 @@ final class StructuredEvaluator
         EvaluationContext $context
     ): bool {
 
-        $actual   = $context->attributes[$condition['field']] ?? null;
+        $actual = $context->attributes[$condition['field']] ?? null;
         $expected = $this->resolveDynamicValue(
             $condition['value'] ?? null,
             $context

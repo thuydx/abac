@@ -9,7 +9,7 @@ use ThuyDX\ABAC\Structured\Engine\StructuredOperatorRegistry;
 describe('StructuredEvaluator (ABAC 1.0)', function () {
 
     beforeEach(function () {
-        $this->registry  = new StructuredOperatorRegistry();
+        $this->registry = new StructuredOperatorRegistry();
         $this->evaluator = new StructuredEvaluator($this->registry);
     });
 
@@ -17,9 +17,9 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
 
         it('evaluates equals condition', function () {
             $rule = [
-                'field'    => 'age',
+                'field' => 'age',
                 'operator' => '=',
-                'value'    => 18,
+                'value' => 18,
             ];
 
             $context = new EvaluationContext(
@@ -34,9 +34,9 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
 
         it('evaluates greater than condition', function () {
             $rule = [
-                'field'    => 'age',
+                'field' => 'age',
                 'operator' => '>',
-                'value'    => 18,
+                'value' => 18,
             ];
 
             $context = new EvaluationContext(
@@ -54,17 +54,17 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
 
         it('evaluates AND group', function () {
             $rule = [
-                'operator'   => 'and',
+                'operator' => 'and',
                 'conditions' => [
                     [
-                        'field'    => 'age',
+                        'field' => 'age',
                         'operator' => '>=',
-                        'value'    => 18,
+                        'value' => 18,
                     ],
                     [
-                        'field'    => 'active',
+                        'field' => 'active',
                         'operator' => '=',
-                        'value'    => true,
+                        'value' => true,
                     ],
                 ],
             ];
@@ -73,7 +73,7 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
                 userUuid  : 'user-1',
                 permission: 'post.view',
                 attributes: [
-                    'age'    => 20,
+                    'age' => 20,
                     'active' => true,
                 ]
             );
@@ -84,17 +84,17 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
 
         it('evaluates OR group', function () {
             $rule = [
-                'operator'   => 'or',
+                'operator' => 'or',
                 'conditions' => [
                     [
-                        'field'    => 'age',
+                        'field' => 'age',
                         'operator' => '<',
-                        'value'    => 18,
+                        'value' => 18,
                     ],
                     [
-                        'field'    => 'role',
+                        'field' => 'role',
                         'operator' => '=',
-                        'value'    => 'admin',
+                        'value' => 'admin',
                     ],
                 ],
             ];
@@ -103,7 +103,7 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
                 userUuid  : 'user-1',
                 permission: 'post.view',
                 attributes: [
-                    'age'  => 15,
+                    'age' => 15,
                     'role' => 'admin',
                 ]
             );
@@ -117,9 +117,9 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
 
         it('resolves user_uuid dynamically', function () {
             $rule = [
-                'field'    => 'owner_id',
+                'field' => 'owner_id',
                 'operator' => '=',
-                'value'    => 'user_uuid',
+                'value' => 'user_uuid',
             ];
 
             $context = new EvaluationContext(
@@ -139,25 +139,25 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
 
         it('evaluates nested AND/OR structure', function () {
             $rule = [
-                'operator'   => 'and',
+                'operator' => 'and',
                 'conditions' => [
                     [
-                        'field'    => 'age',
+                        'field' => 'age',
                         'operator' => '>=',
-                        'value'    => 18,
+                        'value' => 18,
                     ],
                     [
-                        'operator'   => 'or',
+                        'operator' => 'or',
                         'conditions' => [
                             [
-                                'field'    => 'role',
+                                'field' => 'role',
                                 'operator' => '=',
-                                'value'    => 'admin',
+                                'value' => 'admin',
                             ],
                             [
-                                'field'    => 'role',
+                                'field' => 'role',
                                 'operator' => '=',
-                                'value'    => 'editor',
+                                'value' => 'editor',
                             ],
                         ],
                     ],
@@ -168,7 +168,7 @@ describe('StructuredEvaluator (ABAC 1.0)', function () {
                 userUuid  : 'user-1',
                 permission: 'post.view',
                 attributes: [
-                    'age'  => 20,
+                    'age' => 20,
                     'role' => 'editor',
                 ]
             );

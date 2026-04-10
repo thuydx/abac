@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use ThuyDX\ABAC\Engine\EvaluationContext;
 use ThuyDX\ABAC\Policies\StructuredPolicy;
 use ThuyDX\ABAC\Structured\Engine\StructuredEvaluator;
 use ThuyDX\ABAC\Structured\Engine\StructuredOperatorRegistry;
-use ThuyDX\ABAC\Engine\EvaluationContext;
 use ThuyDX\ABAC\ValueObjects\Decision;
 
 describe('StructuredPolicy (ABAC 1.0)', function () {

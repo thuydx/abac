@@ -16,7 +16,7 @@ final class Tokenizer
 
     public function __construct(string $input)
     {
-        $this->input  = trim($input);
+        $this->input = trim($input);
         $this->length = strlen($this->input);
     }
 

@@ -18,7 +18,7 @@ describe('AbacEngine (ABAC 1.0)', function () {
     beforeEach(function () {
 
         $this->repository = Mockery::mock(ConstraintRepositoryInterface::class);
-        $this->policy     = Mockery::mock(PolicyInterface::class);
+        $this->policy = Mockery::mock(PolicyInterface::class);
 
         $this->engine = new AbacEngine(
             $this->repository,

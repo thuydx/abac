@@ -11,14 +11,14 @@ describe('ExpressionPolicy (ABAC 1.0)', function () {
 
     beforeEach(function () {
         $this->evaluator = new Evaluator();
-        $this->policy    = new ExpressionPolicy($this->evaluator);
+        $this->policy = new ExpressionPolicy($this->evaluator);
     });
 
     describe('supports()', function () {
 
         it('returns true for valid DSL expression', function () {
             $expression = [
-                'type'       => 'dsl',
+                'type' => 'dsl',
                 'expression' => 'age >= 18',
             ];
 
@@ -49,7 +49,7 @@ describe('ExpressionPolicy (ABAC 1.0)', function () {
 
         it('returns ALLOW when expression evaluates true', function () {
             $expression = [
-                'type'       => 'dsl',
+                'type' => 'dsl',
                 'expression' => 'age >= 18',
             ];
 
@@ -66,7 +66,7 @@ describe('ExpressionPolicy (ABAC 1.0)', function () {
 
         it('returns ABSTAIN when expression evaluates false', function () {
             $expression = [
-                'type'       => 'dsl',
+                'type' => 'dsl',
                 'expression' => 'age >= 18',
             ];
 
@@ -84,7 +84,7 @@ describe('ExpressionPolicy (ABAC 1.0)', function () {
         it('returns DENY when evaluator throws exception', function () {
 
             $expression = [
-                'type'       => 'dsl',
+                'type' => 'dsl',
                 'expression' => 'age @@ 18', // invalid operator → throws
             ];
 

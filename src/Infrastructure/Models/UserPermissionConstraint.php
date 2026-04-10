@@ -29,7 +29,7 @@ final class UserPermissionConstraint extends Model
 
     protected $casts = [
         'expression' => 'array',
-        'priority'   => 'integer',
+        'priority' => 'integer',
     ];
 
     public function getTable(): string

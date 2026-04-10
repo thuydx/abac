@@ -17,14 +17,14 @@ final class Operators
     ): bool {
 
         // Normalize DateTime if possible
-        $left  = self::normalizeDate($left);
+        $left = self::normalizeDate($left);
         $right = self::normalizeDate($right);
 
         return match ($operator) {
             '==' => $left === $right,
             '!=' => $left !== $right,
-            '>'  => $left > $right,
-            '<'  => $left < $right,
+            '>' => $left > $right,
+            '<' => $left < $right,
             '>=' => $left >= $right,
             '<=' => $left <= $right,
             'in' => in_array($left, (array) $right, true),

@@ -6,8 +6,8 @@ namespace ThuyDX\ABAC\Policies;
 
 use Throwable;
 use ThuyDX\ABAC\Contracts\PolicyInterface;
-use ThuyDX\ABAC\Engine\EvaluationContext;
 use ThuyDX\ABAC\DSL\Evaluator;
+use ThuyDX\ABAC\Engine\EvaluationContext;
 use ThuyDX\ABAC\ValueObjects\Decision;
 
 final class ExpressionPolicy implements PolicyInterface
